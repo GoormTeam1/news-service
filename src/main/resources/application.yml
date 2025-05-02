@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: news-service
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: ${DB_DRIVER}
+  jpa:
+    hibernate:
+      ddl-auto: update
+      use-sql-comments: true
+    show-sql: ${JPA_SHOW_SQL:true}
+    database-platform: ${JPA_DIALECT:org.hibernate.dialect.MySQLDialect}
+
+server:
+  port: 8082
