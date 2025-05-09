@@ -20,8 +20,9 @@ public class Scrab {
     @Column(name = "status", length = 20)
     private String status;
 
-    public Scrab(Long userId, Long newsId, String status) {
-        this.id = new ScrabId(userId, newsId);
+    // 변경된 생성자: userId → userEmail
+    public Scrab(String userEmail, Long newsId, String status) {
+        this.id = new ScrabId(userEmail, newsId);
         this.status = status;
     }
 }

@@ -8,8 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ScrabDto {
-    
-    private Long userId;
+    private String userEmail;
     private Long newsId;
     private String status;
 }

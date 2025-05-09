@@ -21,11 +21,11 @@ public class ScrabService {
 
     private final ScrabRepository scrabRepository;
 
-    public Page<ScrabDto> getUserScrabs(Long userId, Pageable pageable) {
-        Page<Scrab> scrabPage = scrabRepository.findByIdUserId(userId, pageable);
+    public Page<ScrabDto> getUserScrabs(String userEmail, Pageable pageable) {
+        Page<Scrab> scrabPage = scrabRepository.findByIdUserEmail(userEmail, pageable);
         List<ScrabDto> dtoList = scrabPage.getContent().stream()
                 .map(scrab -> new ScrabDto(
-                        scrab.getId().getUserId(),
+                        scrab.getId().getUserEmail(),
                         scrab.getId().getNewsId(),
                         scrab.getStatus()))
                 .collect(Collectors.toList());
@@ -33,24 +33,24 @@ public class ScrabService {
         return new PageImpl<>(dtoList, pageable, scrabPage.getTotalElements());
     }
 
-    public void addScrab(Long userId, Long newsId, String status) {
-        ScrabId id = new ScrabId(userId, newsId);
+    public void addScrab(String userEmail, Long newsId, String status) {
+        ScrabId id = new ScrabId(userEmail, newsId);
         if (!scrabRepository.existsById(id)) {
-            Scrab scrab = new Scrab(userId, newsId, status);
+            Scrab scrab = new Scrab(userEmail, newsId, status);
             scrabRepository.save(scrab);
         }
     }
 
-    public void deleteScrab(Long userId, Long newsId) {
-        scrabRepository.deleteById(new ScrabId(userId, newsId));
+    public void deleteScrab(String userEmail, Long newsId) {
+        scrabRepository.deleteById(new ScrabId(userEmail, newsId));
     }
 
-    public void updateScrabStatus(Long userId, Long newsId, String newStatus) {
-        ScrabId id = new ScrabId(userId, newsId);
+    public void updateScrabStatus(String userEmail, Long newsId, String newStatus) {
+        ScrabId id = new ScrabId(userEmail, newsId);
         scrabRepository.findById(id).ifPresent(scrab -> {
             scrab.setStatus(newStatus);
             scrabRepository.save(scrab);
         });
     }
-
 }
+

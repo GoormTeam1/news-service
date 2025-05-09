@@ -14,27 +14,31 @@ public class ScrabController {
 
     private final ScrabService scrabService;
 
-    @GetMapping("/{userId}")
+    // 이메일 기반으로 스크랩 조회
+    @GetMapping("/{userEmail}")
     public Page<ScrabDto> getScrabs(
-            @PathVariable Long userId,
+            @PathVariable String userEmail,
             Pageable pageable
     ) {
-        return scrabService.getUserScrabs(userId, pageable);
+        return scrabService.getUserScrabs(userEmail, pageable);
     }
 
+    // 이메일 기반으로 스크랩 추가
     @PostMapping
     public void addScrab(@RequestBody ScrabDto dto) {
-        scrabService.addScrab(dto.getUserId(), dto.getNewsId(), dto.getStatus());
+        scrabService.addScrab(dto.getUserEmail(), dto.getNewsId(), dto.getStatus());
     }
 
+    // 이메일 기반으로 스크랩 삭제
     @DeleteMapping
-    public void deleteScrab(@RequestParam Long userId,
+    public void deleteScrab(@RequestParam String userEmail,
                             @RequestParam Long newsId) {
-        scrabService.deleteScrab(userId, newsId);
+        scrabService.deleteScrab(userEmail, newsId);
     }
 
+    // 이메일 기반으로 스크랩 상태 변경
     @PutMapping
     public void updateScrabStatus(@RequestBody ScrabDto dto) {
-        scrabService.updateScrabStatus(dto.getUserId(), dto.getNewsId(), dto.getStatus());
+        scrabService.updateScrabStatus(dto.getUserEmail(), dto.getNewsId(), dto.getStatus());
     }
 }

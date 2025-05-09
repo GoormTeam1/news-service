@@ -27,14 +27,11 @@ public class NewsDto {
     /** 기사 원문 내용 */
     private String fullText;
     
-    /** 기사 요약 */
-    private String summary;
-    
     /** 기사 출처 */
-    private String source;
+    private String sourceLink;
 
     /** 기사 이미지 URL */
-    private String imageLink;
+    private String image;
     
     /** 기사 카테고리 */
     private String category;
@@ -43,7 +40,7 @@ public class NewsDto {
     private LocalDateTime publishedAt;
     
     /** 기사 생성 일시 */
-    private LocalDateTime createdAt;
+    private LocalDateTime createAt;
 
     /**
      * News 엔티티를 NewsDto로 변환하는 메서드
@@ -55,12 +52,11 @@ public class NewsDto {
                 .id(news.getId())
                 .title(news.getTitle())
                 .fullText(news.getFullText())
-                .summary(news.getSummary())
-                .source(news.getSource())
+                .sourceLink(news.getSourceLink())
                 .category(news.getCategory())
                 .publishedAt(news.getPublishedAt())
-                .imageLink(news.getImageLink())
-                .createdAt(news.getCreatedAt())
+                .image(news.getImage())
+                .createAt(news.getCreateAt())
                 .build();
     }
 }

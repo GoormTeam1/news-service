@@ -9,29 +9,29 @@ import java.util.Objects;
 @Embeddable
 public class ScrabId implements Serializable {
 
-    @Column(name = "user_id")
-    private Long userId;
+    @Column(name = "user_email", nullable = false, length = 255)
+    private String userEmail;
 
-    @Column(name = "news_id")
+    @Column(name = "news_id", nullable = false)
     private Long newsId;
 
     public ScrabId() {}
 
-    public ScrabId(Long userId, Long newsId) {
-        this.userId = userId;
+    public ScrabId(String userEmail, Long newsId) {
+        this.userEmail = userEmail;
         this.newsId = newsId;
     }
 
-    public Long getUserId() {
-        return userId;
+    public String getUserEmail() {
+        return userEmail;
     }
 
     public Long getNewsId() {
         return newsId;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
     public void setNewsId(Long newsId) {
@@ -43,12 +43,12 @@ public class ScrabId implements Serializable {
         if (this == o) return true;
         if (!(o instanceof ScrabId)) return false;
         ScrabId scrabId = (ScrabId) o;
-        return Objects.equals(userId, scrabId.userId) &&
+        return Objects.equals(userEmail, scrabId.userEmail) &&
                Objects.equals(newsId, scrabId.newsId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, newsId);
+        return Objects.hash(userEmail, newsId);
     }
 }

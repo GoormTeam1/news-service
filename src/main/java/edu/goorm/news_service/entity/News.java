@@ -32,11 +32,8 @@ public class News {
     @Column(name = "full_text", columnDefinition = "TEXT")
     private String fullText;
 
-    @Column
-    private String summary;
-
-    @Column
-    private String source;
+    @Column(name = "source_link")
+    private String sourceLink;
 
     @Column
     private String category;
@@ -44,11 +41,10 @@ public class News {
     @Column(name = "published_at")
     private LocalDateTime publishedAt;
 
-    @Column(name = "image_link")
-    private String imageLink;
+    private String image;
 
     @CreatedDate
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
+    @Column(name = "create_at")
+    private LocalDateTime createAt;
 
 }
