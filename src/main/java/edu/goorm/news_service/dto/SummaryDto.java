@@ -11,7 +11,7 @@ import edu.goorm.news_service.entity.Summary;
 @Getter
 @Builder
 public class SummaryDto {
-    private Long id;
+    private Long summaryId;
     private Long newsId;
     private String level;
     private String summary;
@@ -23,7 +23,7 @@ public class SummaryDto {
      */
     public static SummaryDto fromEntity(Summary summary) {
         return SummaryDto.builder()
-                .id(summary.getId())
+                .summaryId(summary.getSummaryId())
                 .newsId(summary.getNewsId())
                 .level(summary.getLevel())
                 .summary(summary.getSummary())
