@@ -2,12 +2,15 @@ package edu.goorm.news_service.controller;
 
 import edu.goorm.news_service.dto.NewsDto;
 import edu.goorm.news_service.dto.NewsWithScrabDto;
+import edu.goorm.news_service.dto.RecommendationNewsDto;
 import edu.goorm.news_service.entity.News;
 import edu.goorm.news_service.service.NewsService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 기사 관련 API를 처리하는 컨트롤러
@@ -59,5 +62,10 @@ public class NewsController {
     @DeleteMapping("/{id}")
     public void deleteNews(@PathVariable Long id) {
         newsService.deleteNews(id);
+    }
+
+    @PostMapping("/internal/find-news-by-NewsId")
+    public ResponseEntity<List<RecommendationNewsDto>> getRecommendationNews(@RequestBody List<Long> idList) {
+        return ResponseEntity.ok(newsService.getRecommendationNews(idList));
     }
 }
