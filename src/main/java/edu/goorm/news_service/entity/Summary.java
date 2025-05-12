@@ -18,10 +18,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Summary {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "summary_id")
-    private Long id;
+    private Long summaryId;
 
     @Column(name = "news_id")
     private Long newsId;

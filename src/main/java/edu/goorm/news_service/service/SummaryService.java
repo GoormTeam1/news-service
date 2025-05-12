@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import edu.goorm.news_service.dto.SummaryDto;
 import edu.goorm.news_service.entity.Summary;
 import edu.goorm.news_service.repository.SummaryRepository;
+import jakarta.persistence.EntityNotFoundException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,4 +41,19 @@ public class SummaryService {
                 .map(SummaryDto::fromEntity)
                 .collect(Collectors.toList());
     }
+
+    /**
+     * SummaryId를 통해 newsId를 조회
+     * 
+     * @param summaryId 요약 ID
+     * @return 요약 정보
+     */
+    public SummaryDto getSummaryBySummaryId(Long summaryId) {
+        Summary summary = summaryRepository.findBySummaryId(summaryId);
+        if (summary == null) {
+            throw new EntityNotFoundException("요약 정보를 찾을 수 없습니다. summaryId=" + summaryId);
+        }
+        return SummaryDto.fromEntity(summary);
+    }
+
 }

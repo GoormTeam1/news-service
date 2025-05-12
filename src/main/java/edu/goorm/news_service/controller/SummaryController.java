@@ -41,4 +41,15 @@ public class SummaryController {
     public List<SummaryDto> getSummaries(@PathVariable Long newsId) {
         return summaryService.getSummaries(newsId);
     }
+
+    /**
+     * 주어진 요약 ID에 해당하는 요약 정보를 조회하는 메서드
+     * @param summaryId 요약 ID
+     * @return 요약 정보
+     */
+    @GetMapping("/search/{summaryId}")
+    public SummaryDto getNewsId(@PathVariable Long summaryId) {
+        return summaryService.getSummaryBySummaryId(summaryId);
+    }
+      
 }
