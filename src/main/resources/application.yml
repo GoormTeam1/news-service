@@ -13,5 +13,16 @@ spring:
     show-sql: ${JPA_SHOW_SQL:true}
     database-platform: ${JPA_DIALECT:org.hibernate.dialect.MySQLDialect}
 
+gateway:
+  url: http://localhost:8080
+
+feign:
+  client:
+    config:
+      default:
+        loggerLevel: full
+        connectTimeout: 3000
+        readTimeout: 5000
+
 server:
   port: 8082

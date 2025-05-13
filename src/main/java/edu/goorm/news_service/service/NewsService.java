@@ -3,6 +3,7 @@ package edu.goorm.news_service.service;
 import edu.goorm.news_service.dto.NewsDto;
 import edu.goorm.news_service.dto.NewsWithScrabDto;
 import edu.goorm.news_service.dto.RecommendationNewsDto;
+import edu.goorm.news_service.dto.SummaryDto;
 import edu.goorm.news_service.entity.ScrabId;
 import edu.goorm.news_service.entity.News;
 import edu.goorm.news_service.repository.NewsRepository;
@@ -10,6 +11,8 @@ import edu.goorm.news_service.repository.ScrabRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +28,7 @@ public class NewsService {
 
   private final NewsRepository newsRepository;
   private final ScrabRepository scrabRepository;
+  private final SummaryService summaryService;
 
   public Page<NewsDto> getAllNews(Pageable pageable) {
     return newsRepository.findAll(pageable).map(NewsDto::fromEntity);
@@ -94,4 +98,5 @@ public class NewsService {
     }
     return recommendationNewsDtoList;
   }
+
 }

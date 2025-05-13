@@ -10,20 +10,22 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
 
 /**
  * 기사 관련 API를 처리하는 컨트롤러
  * 기사의 CRUD 작업과 검색 기능을 제공
  */
+
 @RestController
 @RequestMapping("/api/news")
 public class NewsController {
 
     private final NewsService newsService;
-
+    
     public NewsController(NewsService newsService) {
-        this.newsService = newsService;
+        this.newsService = newsService;   
     }
 
     @GetMapping
@@ -38,6 +40,8 @@ public class NewsController {
         NewsWithScrabDto news = newsService.getNewsWithScrabStatus(id, userEmail);
         return ResponseEntity.ok(news);
     }
+
+    
 
     @GetMapping("/search")
     public Page<NewsDto> searchNews(@RequestParam String keyword, Pageable pageable) {
@@ -68,4 +72,6 @@ public class NewsController {
     public ResponseEntity<List<RecommendationNewsDto>> getRecommendationNews(@RequestBody List<Long> idList) {
         return ResponseEntity.ok(newsService.getRecommendationNews(idList));
     }
+
+   
 }

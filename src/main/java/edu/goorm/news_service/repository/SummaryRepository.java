@@ -32,4 +32,7 @@ public interface SummaryRepository extends JpaRepository<Summary, Long> {
 
     Summary findBySummaryId(@Param("summaryId") Long summaryId);
 
+    @Query("SELECT s.id FROM Summary s WHERE s.newsId = :newsId")
+    List<Long> findIdsByNewsId(@Param("newsId") Long newsId);
+
 }
