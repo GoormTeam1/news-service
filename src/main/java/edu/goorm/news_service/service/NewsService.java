@@ -92,9 +92,10 @@ public class NewsService {
 
   public List<RecommendationNewsDto> getRecommendationNews(List<Long> idList) {
     List<RecommendationNewsDto> recommendationNewsDtoList = new ArrayList<>();
-    for (Long l : idList) {
-      recommendationNewsDtoList.add(new RecommendationNewsDto(
-          newsRepository.findById(l).orElseThrow(() -> new IllegalArgumentException("기사를 찾을 수 없습니다. ID=" + l))));
+    List<News> newsList = newsRepository.findAllById(idList);
+
+    for (News news : newsList) {
+      recommendationNewsDtoList.add(new RecommendationNewsDto(news));
     }
     return recommendationNewsDtoList;
   }
