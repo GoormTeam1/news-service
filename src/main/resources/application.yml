@@ -6,6 +6,12 @@ spring:
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
     driver-class-name: ${DB_DRIVER}
+    hikari:
+      maximum-pool-size: 20
+      connection-timeout: 10000           # 커넥션 요청 대기 최대 시간 (ms)
+      idle-timeout: 30000                 # 사용되지 않는 커넥션 회수 시간 (ms)
+      max-lifetime: 60000                 # 커넥션 최대 생존 시간 (ms)
+      leak-detection-threshold: 2000      # 누수 추적 기준 시간 (ms)
   jpa:
     hibernate:
       ddl-auto: update
@@ -26,3 +32,4 @@ feign:
 
 server:
   port: 8082
+  address: 0.0.0.0

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
 @RequiredArgsConstructor
 @Service
 public class LearningStatusService {
@@ -17,7 +18,7 @@ public class LearningStatusService {
     private final QuizClient quizClient;
 
     public String getLearningStatusForNews(String userEmail, Long newsId) {
-        
+
         // 1. 뉴스에 연결된 summaryId 목록 조회
         List<Long> summaryIds = summaryRepository.findIdsByNewsId(newsId);
 
@@ -26,15 +27,21 @@ public class LearningStatusService {
 
         // 3. 뉴스 관련 summaryId만 필터링
         List<String> statusList = allWrongQuizzes.stream()
-            .filter(dto -> summaryIds.contains(dto.getSummaryId()))
-            .map(WrongQuizDto::getStatus)
-            .toList();
+                .filter(dto -> summaryIds.contains(dto.getSummaryId()))
+                .map(WrongQuizDto::getStatus)
+                .toList();
 
         // 4. 상태 판별
-        if (statusList.contains("learning")) return "learning";
-        if (statusList.size() == summaryIds.size() && statusList.stream().allMatch(s -> s.equals("complete"))) {
-            return "complete";
+        if (statusList.size() == summaryIds.size() && statusList.stream().allMatch(s -> s.equals("completed"))) {
+            return "completed";
         }
+        if (statusList.contains("completed")) {
+            return "learning";
+        }
+        if (statusList.contains("learning")) {
+            return "learning";
+        }
+
         return "not_learning";
     }
 }
