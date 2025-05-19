@@ -5,11 +5,13 @@ import edu.goorm.news_service.dto.NewsWithScrabDto;
 import edu.goorm.news_service.dto.RecommendationNewsDto;
 import edu.goorm.news_service.entity.News;
 import edu.goorm.news_service.service.NewsService;
+import jakarta.servlet.http.HttpServletRequest;
+import edu.goorm.news_service.logger.CustomLogger;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 
 import java.util.List;
 
@@ -23,28 +25,54 @@ import java.util.List;
 public class NewsController {
 
     private final NewsService newsService;
-    
+
     public NewsController(NewsService newsService) {
-        this.newsService = newsService;   
+        this.newsService = newsService;
     }
 
     @GetMapping
-    public Page<NewsDto> getAllNews(Pageable pageable) {
+    public Page<NewsDto> getAllNews(
+            Pageable pageable,
+            @RequestHeader(value = "X-User-Email", required = false) String userEmail,
+            HttpServletRequest request) {
+        CustomLogger.logRequest(
+                "GET_ALL_NEWS",
+                "/api/news",
+                "GET",
+                userEmail,
+                null,
+                request);
+
         return newsService.getAllNews(pageable);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<NewsWithScrabDto> getNewsWithScrabCheck(
-            @PathVariable Long id,
-            @RequestHeader(value = "X-User-Email", required = false) String userEmail) {
-        NewsWithScrabDto news = newsService.getNewsWithScrabStatus(id, userEmail);
-        return ResponseEntity.ok(news);
-    }
+    @GetMapping("/{newsId}")
+    public ResponseEntity<NewsDto> getNewsWithScrabCheck(
+            @PathVariable Long newsId,
+            @RequestHeader(value = "X-User-Email", required = false) String userEmail,
+            HttpServletRequest request // ✅ 추가
+    ) {
+        CustomLogger.logRequest(
+                "GET_NEWS",
+                "/api/news/" + newsId,
+                "GET",
+                userEmail,
+                null,
+                request // ✅ 실제 request 객체 전달
+        );
 
-    
+        return ResponseEntity.ok(newsService.getNewsById(newsId));
+    }
 
     @GetMapping("/search")
     public Page<NewsDto> searchNews(@RequestParam String keyword, Pageable pageable) {
+        CustomLogger.logRequest(
+                "SEARCH_NEWS",
+                "/api/news/search",
+                "GET",
+                null,
+                keyword,
+                null);
         return newsService.searchNews(keyword, pageable);
     }
 
@@ -73,5 +101,4 @@ public class NewsController {
         return ResponseEntity.ok(newsService.getRecommendationNews(idList));
     }
 
-   
 }
