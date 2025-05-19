@@ -11,7 +11,7 @@ import java.util.List;
 
 @FeignClient(
     name = "quiz-service",
-    url = "http://172.16.24.156:8083",
+    url = "http://localhost:8083",
     configuration = FeignConfig.class
 )
 public interface QuizClient {
