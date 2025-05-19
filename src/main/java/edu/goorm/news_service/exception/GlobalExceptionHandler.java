@@ -1,20 +1,33 @@
 package edu.goorm.news_service.exception;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import edu.goorm.news_service.logger.CustomLogger;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@RestControllerAdvice
+@ControllerAdvice
 public class GlobalExceptionHandler {
-    
-    private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<String> handleException(Exception e) {
-        log.error("🔥 예외 발생: {}", e.getMessage(), e); // 전체 stack trace 출력
-        return ResponseEntity.internalServerError()
-                .body("에러 발생: " + e.getMessage());
+    public ResponseEntity<String> handleAllExceptions(Exception ex, HttpServletRequest request) {
+        // ✅ 로그 기록
+        CustomLogger.logRequest(
+                "ERROR",
+                request.getRequestURI(),
+                request.getMethod(),
+                request.getHeader("X-User-Email"),
+                "Exception: " + ex.getMessage(),
+                request
+        );
+
+        // 로그 외에도 콘솔에 출력하고 싶다면 (선택)
+        ex.printStackTrace();
+
+        // 사용자에게는 간단한 메시지 반환
+        return ResponseEntity
+                .status(500)
+                .body("서버에서 오류가 발생했습니다.");
     }
 }
+xw
