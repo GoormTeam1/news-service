@@ -5,7 +5,7 @@
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
 
     <!-- ✅ 로그 파일 저장은 따로 설정 -->
-    <appender name="NEWSCONTOLLER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="NEWSCONTROLLER" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>logs/newsController.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>logs/newsController.%d{yyyy-MM-dd}.log</fileNamePattern>
@@ -21,7 +21,7 @@
         <appender-ref ref="CONSOLE"/>
     </root>
 
-    <!-- ✅ UserController 전용 로그 파일 유지 -->
+    <!-- ✅ NewsController 전용 로그 파일 유지 -->
     <logger level="INFO"
       name="edu.goorm.news_service.controller.NewsController"
       additivity="false">
@@ -29,4 +29,3 @@
     </logger>
 
 </configuration>
-
