@@ -2,9 +2,9 @@ spring:
   application:
     name: news-service
   datasource:
-    url: ${DB_URL}
+    url: ${NEWS_DB_URL}
     username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    password: ${NEWS_DB_PASSWORD}
     driver-class-name: ${DB_DRIVER}
     hikari:
       maximum-pool-size: 20
