@@ -65,14 +65,14 @@ public class NewsController {
     }
 
     @GetMapping("/search")
-    public Page<NewsDto> searchNews(@RequestParam String keyword, Pageable pageable) {
+    public Page<NewsDto> searchNews(@RequestParam String keyword, Pageable pageable, @RequestHeader(value = "X-User-Email", required = false) String userEmail,HttpServletRequest request) {
         CustomLogger.logRequest(
                 "SEARCH_NEWS",
                 "/api/news/search",
                 "GET",
-                null,
+                userEmail,
                 keyword,
-                null);
+                request);
         return newsService.searchNews(keyword, pageable);
     }
 
