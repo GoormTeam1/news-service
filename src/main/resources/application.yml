@@ -14,7 +14,7 @@ spring:
       leak-detection-threshold: 2000      # 누수 추적 기준 시간 (ms)
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
       use-sql-comments: true
     show-sql: ${JPA_SHOW_SQL:true}
     database-platform: ${JPA_DIALECT:org.hibernate.dialect.MySQLDialect}
