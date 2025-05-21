@@ -6,9 +6,9 @@
 
     <!-- ✅ NewsController 로그 파일 -->
     <appender name="NEWSCONTROLLER" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>logs/news-service/newsController.log</file>
+        <file>../logs/service/news-service/newsController.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>logs/news-service/newsController.%d{yyyy-MM-dd_HH-mm}.log</fileNamePattern>
+            <fileNamePattern>../logs/service/news-service/newsController.%d{yyyy-MM-dd_HH-mm}.log</fileNamePattern>
             <maxHistory>90</maxHistory> <!-- 20분 단위 기준 약 하루 이상 -->
         </rollingPolicy>
         <encoder>
@@ -18,9 +18,9 @@
 
     <!-- ✅ LearningStatusController 로그 파일 -->
     <appender name="LEARNINGSTATUSCONTROLLER" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>logs/news-service/learningStatusController.log</file>
+        <file>../logs/service/news-service/learningStatusController.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>logs/news-service/learningStatusController.%d{yyyy-MM-dd_HH-mm}.log</fileNamePattern>
+            <fileNamePattern>../logs/service/news-service/learningStatusController.%d{yyyy-MM-dd_HH-mm}.log</fileNamePattern>
             <maxHistory>90</maxHistory>
         </rollingPolicy>
         <encoder>
@@ -30,9 +30,9 @@
 
     <!-- ✅ ScrabController 로그 파일 -->
     <appender name="SCRABCONTROLLER" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>logs/news-service/scrabController.log</file>
+        <file>../logs/service/news-service/scrabController.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>logs/news-service/scrabController.%d{yyyy-MM-dd_HH-mm}.log</fileNamePattern>
+            <fileNamePattern>../logs/service/news-service/scrabController.%d{yyyy-MM-dd_HH-mm}.log</fileNamePattern>
             <maxHistory>90</maxHistory>
         </rollingPolicy>
         <encoder>
@@ -42,9 +42,9 @@
 
     <!-- ✅ SummaryController 로그 파일 -->
     <appender name="SUMMARYCONTROLLER" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>logs/news-service/summaryController.log</file>
+        <file>../logs/service/news-service/summaryController.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>logs/news-service/summaryController.%d{yyyy-MM-dd_HH-mm}.log</fileNamePattern>
+            <fileNamePattern>../logs/service/news-service/summaryController.%d{yyyy-MM-dd_HH-mm}.log</fileNamePattern>
             <maxHistory>90</maxHistory>
         </rollingPolicy>
         <encoder>
