@@ -4,28 +4,82 @@
     <!-- ✅ Spring Boot 기본 콘솔 스타일 유지 -->
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
 
-    <!-- ✅ 로그 파일 저장은 따로 설정 -->
+    <!-- ✅ NewsController 로그 파일 -->
     <appender name="NEWSCONTROLLER" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>logs/newsController.log</file>
+        <file>logs/news-service/newsController.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>logs/newsController.%d{yyyy-MM-dd}.log</fileNamePattern>
-            <maxHistory>30</maxHistory>
+            <fileNamePattern>logs/news-service/newsController.%d{yyyy-MM-dd_HH-mm}.log</fileNamePattern>
+            <maxHistory>90</maxHistory> <!-- 20분 단위 기준 약 하루 이상 -->
         </rollingPolicy>
         <encoder>
-            <pattern>%msg%n</pattern>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
 
-    <!-- ✅ 루트 로거는 Console만 유지 (Spring Boot 기본 스타일 자동 적용) -->
+    <!-- ✅ LearningStatusController 로그 파일 -->
+    <appender name="LEARNINGSTATUSCONTROLLER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/news-service/learningStatusController.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/news-service/learningStatusController.%d{yyyy-MM-dd_HH-mm}.log</fileNamePattern>
+            <maxHistory>90</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- ✅ ScrabController 로그 파일 -->
+    <appender name="SCRABCONTROLLER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/news-service/scrabController.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/news-service/scrabController.%d{yyyy-MM-dd_HH-mm}.log</fileNamePattern>
+            <maxHistory>90</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- ✅ SummaryController 로그 파일 -->
+    <appender name="SUMMARYCONTROLLER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/news-service/summaryController.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/news-service/summaryController.%d{yyyy-MM-dd_HH-mm}.log</fileNamePattern>
+            <maxHistory>90</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- ✅ 루트 로거: 콘솔 출력 유지 -->
     <root level="INFO">
         <appender-ref ref="CONSOLE"/>
     </root>
 
-    <!-- ✅ NewsController 전용 로그 파일 유지 -->
+    <!-- ✅ 개별 컨트롤러 로거 설정 -->
     <logger level="INFO"
       name="edu.goorm.news_service.controller.NewsController"
       additivity="false">
         <appender-ref ref="NEWSCONTROLLER"/>
+    </logger>
+
+    <logger level="INFO"
+      name="edu.goorm.news_service.controller.LearningStatusController"
+      additivity="false">
+        <appender-ref ref="LEARNINGSTATUSCONTROLLER"/>
+    </logger>
+
+    <logger level="INFO"
+      name="edu.goorm.news_service.controller.ScrabController"
+      additivity="false">
+        <appender-ref ref="SCRABCONTROLLER"/>
+    </logger>
+
+    <logger level="INFO"
+      name="edu.goorm.news_service.controller.SummaryController"
+      additivity="false">
+        <appender-ref ref="SUMMARYCONTROLLER"/>
     </logger>
 
 </configuration>
