@@ -39,6 +39,11 @@ dependencies {
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 
+	// ✅ Kafka Consumer 기능에 필요한 의존성
+    implementation 'org.springframework.kafka:spring-kafka'
+
+    // (Optional) JSON 변환을 위한 Jackson
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
 }
 
 dependencyManagement {

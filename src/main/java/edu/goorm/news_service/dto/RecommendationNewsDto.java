@@ -2,10 +2,12 @@ package edu.goorm.news_service.dto;
 
 import edu.goorm.news_service.entity.News;
 import java.time.LocalDateTime;
+import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+
 
 @Getter
 @AllArgsConstructor
@@ -24,7 +26,7 @@ public class RecommendationNewsDto {
   private String category;
 
   /** 기사 발행 일시 */
-  private LocalDateTime publishedAt;
+  private LocalDate publishedAt;
 
   public RecommendationNewsDto(News news) {
     this.id = news.getId();

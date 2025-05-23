@@ -5,8 +5,7 @@ import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 /**
  * 기사 정보를 저장하는 엔티티 클래스
@@ -39,12 +38,12 @@ public class News {
     private String category;
 
     @Column(name = "published_at")
-    private LocalDateTime publishedAt;
+    private LocalDate publishedAt;
 
     private String image;
 
     @CreatedDate
     @Column(name = "create_at")
-    private LocalDateTime createAt;
+    private LocalDate createAt;
 
 }
