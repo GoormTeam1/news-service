@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
-@EnableFeignClients(basePackages = "edu.goorm.news_service.client")
+@EnableFeignClients(basePackages = "edu.goorm.news_service.domain.client")
 public class NewsServiceApplication {
 
 	

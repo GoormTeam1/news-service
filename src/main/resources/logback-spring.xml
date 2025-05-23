@@ -1,85 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-    <!-- ✅ Spring Boot 기본 콘솔 스타일 유지 -->
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
 
-    <!-- ✅ NewsController 로그 파일 -->
-    <appender name="NEWSCONTROLLER" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>../logs/service/news-service/newsController.log</file>
+    <!-- ✅ info 로그 (JSON 형식) -->
+    <appender name="INFO_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>../logs/service/news-service/info.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>../logs/service/news-service/newsController.%d{yyyy-MM-dd_HH-mm}.log</fileNamePattern>
-            <maxHistory>90</maxHistory> <!-- 20분 단위 기준 약 하루 이상 -->
+            <fileNamePattern>../logs/service/news-service/info.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
         </rollingPolicy>
-        <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%msg%n</Pattern>
         </encoder>
     </appender>
 
-    <!-- ✅ LearningStatusController 로그 파일 -->
-    <appender name="LEARNINGSTATUSCONTROLLER" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>../logs/service/news-service/learningStatusController.log</file>
+    <!-- ✅ error 로그 (JSON 형식) -->
+    <appender name="ERROR_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>../logs/service/news-service/error.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>../logs/service/news-service/learningStatusController.%d{yyyy-MM-dd_HH-mm}.log</fileNamePattern>
-            <maxHistory>90</maxHistory>
+            <fileNamePattern>../logs/service/news-service/error.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
         </rollingPolicy>
-        <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%msg%n</Pattern>
         </encoder>
     </appender>
 
-    <!-- ✅ ScrabController 로그 파일 -->
-    <appender name="SCRABCONTROLLER" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>../logs/service/news-service/scrabController.log</file>
+    <!-- ✅ external 로그 (Kafka 등 외부 시스템 연동) -->
+    <appender name="EXTERNAL_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>../logs/service/news-service/external.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>../logs/service/news-service/scrabController.%d{yyyy-MM-dd_HH-mm}.log</fileNamePattern>
-            <maxHistory>90</maxHistory>
+            <fileNamePattern>../logs/service/news-service/external.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
         </rollingPolicy>
-        <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%msg%n</Pattern>
         </encoder>
     </appender>
 
-    <!-- ✅ SummaryController 로그 파일 -->
-    <appender name="SUMMARYCONTROLLER" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>../logs/service/news-service/summaryController.log</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>../logs/service/news-service/summaryController.%d{yyyy-MM-dd_HH-mm}.log</fileNamePattern>
-            <maxHistory>90</maxHistory>
-        </rollingPolicy>
-        <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
-        </encoder>
-    </appender>
+    <!-- ✅ 각각의 로거에 Appender 연결 -->
+    <logger name="infoLogger" level="INFO" additivity="false">
+        <appender-ref ref="INFO_LOG"/>
+    </logger>
 
-    <!-- ✅ 루트 로거: 콘솔 출력 유지 -->
+    <logger name="errorLogger" level="ERROR" additivity="false">
+        <appender-ref ref="ERROR_LOG"/>
+    </logger>
+
+    <logger name="externalLogger" level="INFO" additivity="false">
+        <appender-ref ref="EXTERNAL_LOG"/>
+    </logger>
+
+    <!-- ✅ 루트 로거는 콘솔만 유지 -->
     <root level="INFO">
         <appender-ref ref="CONSOLE"/>
     </root>
-
-    <!-- ✅ 개별 컨트롤러 로거 설정 -->
-    <logger level="INFO"
-      name="edu.goorm.news_service.controller.NewsController"
-      additivity="false">
-        <appender-ref ref="NEWSCONTROLLER"/>
-    </logger>
-
-    <logger level="INFO"
-      name="edu.goorm.news_service.controller.LearningStatusController"
-      additivity="false">
-        <appender-ref ref="LEARNINGSTATUSCONTROLLER"/>
-    </logger>
-
-    <logger level="INFO"
-      name="edu.goorm.news_service.controller.ScrabController"
-      additivity="false">
-        <appender-ref ref="SCRABCONTROLLER"/>
-    </logger>
-
-    <logger level="INFO"
-      name="edu.goorm.news_service.controller.SummaryController"
-      additivity="false">
-        <appender-ref ref="SUMMARYCONTROLLER"/>
-    </logger>
 
 </configuration>
