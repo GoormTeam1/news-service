@@ -5,7 +5,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import edu.goorm.news_service.domain.entity.News;
 
@@ -25,9 +27,11 @@ public class NewsDto {
     private String title;
     
     /** 기사 원문 내용 */
+    @JsonProperty("full_text")
     private String fullText;
     
     /** 기사 출처 */
+    @JsonProperty("source_link")
     private String sourceLink;
 
     /** 기사 이미지 URL */
@@ -37,10 +41,12 @@ public class NewsDto {
     private String category;
     
     /** 기사 발행 일시 */
-    private LocalDateTime publishedAt;
+    @JsonProperty("published_at")
+    private LocalDate publishedAt;
     
     /** 기사 생성 일시 */
-    private LocalDateTime createAt;
+    @JsonProperty("create_at")
+    private LocalDate createAt;
 
     /**
      * News 엔티티를 NewsDto로 변환하는 메서드

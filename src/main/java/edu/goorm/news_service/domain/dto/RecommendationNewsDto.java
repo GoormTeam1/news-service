@@ -2,9 +2,11 @@ package edu.goorm.news_service.domain.dto;
 
 import edu.goorm.news_service.domain.entity.News;
 import java.time.LocalDateTime;
+import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
 
 @Getter
 @AllArgsConstructor
@@ -23,7 +25,7 @@ public class RecommendationNewsDto {
   private String category;
 
   /** 기사 발행 일시 */
-  private LocalDateTime publishedAt;
+  private LocalDate publishedAt;
 
   public RecommendationNewsDto(News news) {
     this.id = news.getId();

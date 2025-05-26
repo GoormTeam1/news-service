@@ -5,8 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.*;
-
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import edu.goorm.news_service.domain.entity.News;
 
@@ -22,8 +21,8 @@ public class NewsWithScrabDto {
     private String category;
     private String sourceLink;
     private String image;
-    private LocalDateTime publishedAt;
-    private LocalDateTime createAt;
+    private LocalDate publishedAt;
+    private LocalDate createAt;
     private boolean isScrabbed;
 
     public static NewsWithScrabDto fromEntity(News news, boolean isScrabbed) {

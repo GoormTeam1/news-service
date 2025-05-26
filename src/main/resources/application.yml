@@ -18,6 +18,11 @@ spring:
       use-sql-comments: true
     show-sql: ${JPA_SHOW_SQL:true}
     database-platform: ${JPA_DIALECT:org.hibernate.dialect.MySQLDialect}
+  kafka:
+    consumer:
+      group-id: news-group
+      bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
+      auto-offset-reset: earliest
 
 gateway:
   url: http://localhost:8080

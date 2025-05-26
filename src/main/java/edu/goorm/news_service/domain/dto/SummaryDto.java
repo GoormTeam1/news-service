@@ -2,6 +2,8 @@ package edu.goorm.news_service.domain.dto;
 
 import lombok.Builder;
 import lombok.Getter;
+
+import lombok.Setter;
 import edu.goorm.news_service.domain.entity.Summary;
 
 
@@ -9,6 +11,7 @@ import edu.goorm.news_service.domain.entity.Summary;
  * 요약 정보를 전달하는 DTO 클래스
  */
 @Getter
+@Setter
 @Builder
 public class SummaryDto {
     private Long summaryId;
