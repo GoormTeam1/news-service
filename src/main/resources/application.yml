@@ -25,7 +25,7 @@ spring:
       auto-offset-reset: earliest
 
 gateway:
-  url: http://localhost:8080
+  url: ${GATEWAY_URL}
 
 feign:
   client:
@@ -38,3 +38,6 @@ feign:
 server:
   port: 8082
   address: 0.0.0.0
+
+quiz-service:
+  url: ${QUIZ_URL}
