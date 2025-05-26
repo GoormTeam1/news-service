@@ -1,7 +1,6 @@
 package edu.goorm.news_service.domain.dto;
 
 import edu.goorm.news_service.domain.entity.News;
-import java.time.LocalDateTime;
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

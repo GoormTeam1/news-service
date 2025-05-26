@@ -1,8 +1,5 @@
 package edu.goorm.news_service.global.exception;
 
-
-import edu.goorm.news_service.global.exception.BusinessException;
-import edu.goorm.news_service.global.exception.ErrorCode;
 import edu.goorm.news_service.global.logger.CustomLogger;
 import edu.goorm.news_service.global.response.ApiResponse;
 import jakarta.servlet.http.HttpServletRequest;

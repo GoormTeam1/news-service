@@ -24,7 +24,7 @@ public class NewsService {
 
   private final NewsRepository newsRepository;
   private final ScrabRepository scrabRepository;
-  private final SummaryService summaryService;
+  
 
   public Page<NewsDto> getAllNews(Pageable pageable) {
     return newsRepository.findAll(pageable).map(NewsDto::fromEntity);

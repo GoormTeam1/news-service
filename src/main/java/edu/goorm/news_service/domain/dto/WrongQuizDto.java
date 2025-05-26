@@ -1,6 +1,5 @@
 package edu.goorm.news_service.domain.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

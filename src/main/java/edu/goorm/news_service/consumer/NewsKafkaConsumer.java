@@ -1,8 +1,8 @@
 package edu.goorm.news_service.consumer;
 
-import edu.goorm.news_service.service.NewsBulkInsertBuffer;
+import edu.goorm.news_service.domain.service.NewsBulkInsertBuffer;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.goorm.news_service.dto.NewsDto;
+import edu.goorm.news_service.domain.dto.NewsDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
