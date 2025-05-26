@@ -5,7 +5,6 @@ import edu.goorm.news_service.domain.entity.News;
 import edu.goorm.news_service.domain.repository.NewsRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,11 +17,10 @@ import java.util.*;
 public class NewsBulkInsertBuffer {
 
     private final List<News> buffer = Collections.synchronizedList(new ArrayList<>());
-    private final List<Acknowledgment> ackBuffer = Collections.synchronizedList(new ArrayList<>());
     private final NewsRepository newsRepository;
     private static final int BATCH_SIZE = 100;
 
-    public void add(NewsDto dto, Acknowledgment ack) {
+    public synchronized void add(NewsDto dto) {
         buffer.add(News.builder()
                 .title(dto.getTitle())
                 .fullText(dto.getFullText())
@@ -32,7 +30,6 @@ public class NewsBulkInsertBuffer {
                 .image(dto.getImage())
                 .createAt(dto.getCreateAt())
                 .build());
-        ackBuffer.add(ack);
         log.info("Added news item to buffer: {}", dto.getTitle());
         if (buffer.size() >= BATCH_SIZE) flush();
     }
@@ -46,13 +43,10 @@ public class NewsBulkInsertBuffer {
     public synchronized void flush() {
         if (buffer.isEmpty()) return;
         List<News> toSave = new ArrayList<>(buffer);
-        List<Acknowledgment> toAck = new ArrayList<>(ackBuffer);
         buffer.clear();
-        ackBuffer.clear();
 
         newsRepository.saveAll(toSave);
-        toAck.forEach(Acknowledgment::acknowledge);
 
-        log.info("Flushed and committed {} news items to DB", toSave.size());
+        log.info("Flushed {} news items to DB", toSave.size());
     }
-} 
+}
