@@ -4,8 +4,8 @@
 APP_NAME="news-service"
 JAR_NAME="news.jar"
 APP_DIR="/home/ubuntu/backend/$APP_NAME"
-LOG_FILE="$LOG_DIR/$APP_NAME.log"
 LOG_DIR="/home/ubuntu/backend/logs/service/$APP_NAME"
+LOG_FILE="$LOG_DIR/$APP_NAME.log"
 ENV_FILE="$APP_DIR/../.env"
 
 
