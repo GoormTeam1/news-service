@@ -23,6 +23,18 @@ spring:
       group-id: news-group
       bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
       auto-offset-reset: earliest
+  cloud:
+    aws:
+      region:
+        static: ap-northeast-2
+      credentials:
+        access-key: ${AWS_ACCESS_KEY}
+        secret-key: ${AWS_SECRET_KEY}
+      sqs:
+        listener:
+          max-number-of-messages: 10
+          wait-time: 20s
+          visibility-timeout: 30s
 
 gateway:
   url: ${GATEWAY_URL}

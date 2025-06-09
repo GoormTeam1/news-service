@@ -9,6 +9,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.*;
 
 @Component
@@ -28,7 +29,7 @@ public class NewsBulkInsertBuffer {
                 .category(dto.getCategory())
                 .publishedAt(dto.getPublishedAt())
                 .image(dto.getImage())
-                .createAt(dto.getCreateAt())
+                .createAt(LocalDate.now())
                 .build());
         log.info("Added news item to buffer: {}", dto.getTitle());
         if (buffer.size() >= BATCH_SIZE) flush();

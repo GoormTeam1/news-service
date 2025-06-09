@@ -44,6 +44,11 @@ dependencies {
 
     // (Optional) JSON 변환을 위한 Jackson
     implementation 'com.fasterxml.jackson.core:jackson-databind'
+
+	// SQS관련 의존성
+	implementation platform("io.awspring.cloud:spring-cloud-aws-dependencies:3.0.1")
+	implementation 'io.awspring.cloud:spring-cloud-aws-starter-sqs'
+
 }
 
 dependencyManagement {
