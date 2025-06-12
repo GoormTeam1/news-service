@@ -47,6 +47,7 @@ dependencies {
 	implementation 'com.h2database:h2'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+	implementation 'commons-io:commons-io:2.14.0'
 
 	// ✅ Kafka Consumer 기능에 필요한 의존성
     implementation 'org.springframework.kafka:spring-kafka'
