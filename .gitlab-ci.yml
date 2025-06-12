@@ -14,8 +14,8 @@ stages:
 
 # 3. 서비스에 따라 달라지는 변수들만 여기서 정의
 variables:
-  SONAR_PROJECT_KEY: "user-service"         # SonarQube 프로젝트 키는 서비스마다 다름
-  ECR_REPOSITORY_NAME: "newords-user"       # ECR 리포지토리 이름도 서비스마다 다름
+  SONAR_PROJECT_KEY: "news-service"         # SonarQube 프로젝트 키는 서비스마다 다름
+  ECR_REPOSITORY_NAME: "newords-news"       # ECR 리포지토리 이름도 서비스마다 다름
 
 # 4. 실제 실행할 작업들은 템플릿을 상속(extends)받아 정의
 build:
